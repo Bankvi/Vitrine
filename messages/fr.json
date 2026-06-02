@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "products": "Produits",
+    "about": "À propos",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "La banque ouest-africaine qui grandit avec vous",
+    "subtitle": "BankVi est une néo-banque communautaire digitale. Tontines digitales, épargne programmable, et paiements mobiles. Tout en un seul endroit.",
+    "cta": "Découvrir",
+    "contact": "Nous contacter"
+  },
+  "features": {
+    "title": "Nos produits",
+    "subtitle": "Quatre solutions pour transformer votre relation avec l'argent en Afrique de l'Ouest.",
+    "esso": "Tontines digitales automatisées, traçables et sécurisées.",
+    "tironienne": "Épargne programmable accessible depuis votre téléphone.",
+    "wallet": "Paiements mobiles intégrés à Moov, Flooz et T-Money.",
+    "blockchain": "Transparence et sécurité via Polygon."
+  },
+  "why": {
+    "title": "Pourquoi BankVi",
+    "tontines": "Tontines modernes",
+    "tontines_desc": "Remplacez les systèmes informels par une solution transparente et sécurisée.",
+    "epargne": "Épargne flexible",
+    "epargne_desc": "Programmez votre épargne à votre rythme, sans contraintes.",
+    "paiements": "Paiements instantanés",
+    "paiements_desc": "Connecté aux opérateurs mobiles pour des transferts rapides et fiables.",
+    "confiance": "Confiance garantie",
+    "confiance_desc": "Blockchain pour la transparence maximale de chaque transaction."
+  },
+  "download": {
+    "title": "Téléchargez BankVi",
+    "subtitle": "Disponible sur iOS et Android. Gérez vos tontines, votre épargne et vos paiements en un clic.",
+    "app_store": "App Store",
+    "google_play": "Google Play"
+  },
+  "blog": {
+    "title": "Actualités BankVi",
+    "subtitle": "Suivez les dernières innovations et actualités de la finance digitale en Afrique de l'Ouest."
+  },
+  "cta": {
+    "title": "Prêt à commencer ?",
+    "subtitle": "Rejoignez une communauté d'utilisateurs qui transforment leur avenir financier.",
+    "button": "Démarrer gratuitement"
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "nom": "Nom complet",
+    "email": "Email",
+    "sujet": "Sujet",
+    "message": "Message",
+    "envoyer": "Envoyer",
+    "sending": "Envoi en cours...",
+    "success": "Message envoyé avec succès ! Nous vous répondrons rapidement.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "footer": {
+    "description": "Une néo-banque communautaire digitale transformant la finance en Afrique de l'Ouest.",
+    "products": "Produits",
+    "ressources": "Ressources",
+    "documentation": "Documentation",
+    "blog_link": "Blog",
+    "help": "Centre d'aide",
+    "status": "Statut du système",
+    "contact": "Contact",
+    "rights": "Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "legal": "Mentions légales"
+  }
+}

@@ -1,14 +1,37 @@
 @import "tailwindcss";
 
+/* Design system BankVi — thème Tailwind v4 */
+
+
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-gold-50: #F9F3E0;
+  --color-gold-100: #F0E3B8;
+  --color-gold-200: #E6D08A;
+  --color-gold-300: #D9BC5B;
+  --color-gold-400: #C9A84C;
+  --color-gold-500: #B8943E;
+  --color-gold-600: #A08030;
+  --color-gold-700: #886C24;
+  --color-gold-800: #705818;
+  --color-gold-900: #58440E;
+}
+
+#contact-modal {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
 :root {
   /* Glass morphism properties */
   --glass-bg: rgba(255, 255, 255, 0.12);
   --glass-border: 1px solid rgba(255, 255, 255, 0.2);
   --glass-blur: 24px;
   
-  /* Colors */
-  --color-amber: #b45309;
-  --color-orange: #ea580c;
+  /* Couleur primaire — Or BankVi */
+  --color-gold: #C9A84C;
+  --color-gold-light: #E0C66A;
+  --color-gold-dark: #A88A2E;
 }
 
 /* Animations */
@@ -123,13 +146,22 @@ html {
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
   @apply transition-colors duration-300;
 }
 
 /* Dark mode body */
 body.dark {
-  background-color: #111827;
+  background-color: #0D0D0D;
+  color: #F5F5F5;
+}
+
+@layer base {
+  .dark {
+    background-color: #0D0D0D;
+    color: #F5F5F5;
+  }
 }
 
 /* Smooth transitions */

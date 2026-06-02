@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "products": "Products",
+    "about": "About",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "The West African bank that grows with you",
+    "subtitle": "BankVi is a digital community neo-bank. Digital tontines, programmable savings, and mobile payments. All in one place.",
+    "cta": "Discover",
+    "contact": "Contact us"
+  },
+  "features": {
+    "title": "Our products",
+    "subtitle": "Four solutions to transform your relationship with money in West Africa.",
+    "esso": "Automated, traceable and secure digital tontines.",
+    "tironienne": "Programmable savings accessible from your phone.",
+    "wallet": "Mobile payments integrated with Moov, Flooz and T-Money.",
+    "blockchain": "Transparency and security via Polygon."
+  },
+  "why": {
+    "title": "Why BankVi",
+    "tontines": "Modern tontines",
+    "tontines_desc": "Replace informal systems with a transparent and secure solution.",
+    "epargne": "Flexible savings",
+    "epargne_desc": "Program your savings at your own pace, without constraints.",
+    "paiements": "Instant payments",
+    "paiements_desc": "Connected to mobile operators for fast and reliable transfers.",
+    "confiance": "Guaranteed trust",
+    "confiance_desc": "Blockchain for maximum transparency of every transaction."
+  },
+  "download": {
+    "title": "Download BankVi",
+    "subtitle": "Available on iOS and Android. Manage your tontines, savings and payments in one click.",
+    "app_store": "App Store",
+    "google_play": "Google Play"
+  },
+  "blog": {
+    "title": "BankVi News",
+    "subtitle": "Follow the latest innovations and news in digital finance in West Africa."
+  },
+  "cta": {
+    "title": "Ready to start?",
+    "subtitle": "Join a community of users transforming their financial future.",
+    "button": "Start for free"
+  },
+  "contact": {
+    "title": "Contact us",
+    "nom": "Full name",
+    "email": "Email",
+    "sujet": "Subject",
+    "message": "Message",
+    "envoyer": "Send",
+    "sending": "Sending...",
+    "success": "Message sent successfully! We will get back to you soon.",
+    "error": "An error occurred. Please try again."
+  },
+  "footer": {
+    "description": "A digital community neo-bank transforming finance in West Africa.",
+    "products": "Products",
+    "ressources": "Resources",
+    "documentation": "Documentation",
+    "blog_link": "Blog",
+    "help": "Help center",
+    "status": "System status",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "legal": "Legal notices"
+  }
+}

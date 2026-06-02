@@ -10,13 +10,26 @@ module.exports = {
             colors: {
                 'light': {
                     'bg': '#ffffff',
-                    'text': '#1f2937',
+                    'text': '#1A1A1A',
                     'border': '#e5e7eb',
                 },
                 'dark': {
-                    'bg': '#111827',
-                    'text': '#f3f4f6',
+                    'bg': '#0D0D0D',
+                    'text': '#F5F5F5',
                     'border': '#374151',
+                },
+                /* Or BankVi — couleur primaire */
+                'gold': {
+                    '50': '#F9F3E0',
+                    '100': '#F0E3B8',
+                    '200': '#E6D08A',
+                    '300': '#D9BC5B',
+                    '400': '#C9A84C',
+                    '500': '#B8943E',
+                    '600': '#A08030',
+                    '700': '#886C24',
+                    '800': '#705818',
+                    '900': '#58440E',
                 },
             },
             animation: {

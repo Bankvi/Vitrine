@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { ThemeProvider } from "next-themes";
+
+/* Police Inter — le design system BankVi */
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "BankVi - La banque numérique ouest-africaine",
@@ -26,9 +34,9 @@ export default function RootLayout({
     <html
       lang="fr"
       suppressHydrationWarning
-      className="scroll-smooth"
+      className={`${inter.variable} scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col relative bg-white dark:bg-gray-950 transition-colors duration-300">
+      <body className="min-h-full flex flex-col relative font-sans bg-white dark:bg-gray-950 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="theme-preference">
           <Header />
           <main className="flex-1">

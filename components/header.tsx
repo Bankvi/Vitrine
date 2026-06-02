@@ -4,11 +4,19 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, Sun, Moon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 glass backdrop-blur-md border-b border-white/10">
@@ -27,7 +35,7 @@ export default function Header() {
               className="h-10 w-auto group-hover:scale-110 transition duration-300"
               priority
             />
-            <span className="text-xl font-bold text-amber-900 dark:text-amber-400 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition duration-300">
+            <span className="text-xl font-bold text-gold-900 dark:text-gold-400 group-hover:text-gold-700 dark:group-hover:text-gold-300 transition duration-300">
               BankVi
             </span>
           </Link>
@@ -36,26 +44,26 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link 
               href="#features"
-              className="text-gray-700 dark:text-gray-300 hover:text-amber-900 dark:hover:text-amber-400 transition duration-300 font-medium relative group"
+              className="text-gray-700 dark:text-gray-300 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 font-medium relative group"
             >
               Produits
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-900 to-orange-900 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
             
             <a 
               href="#"
-              className="text-gray-700 dark:text-gray-300 hover:text-amber-900 dark:hover:text-amber-400 transition duration-300 font-medium relative group"
+              className="text-gray-700 dark:text-gray-300 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 font-medium relative group"
             >
               A propos
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-900 to-orange-900 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
             </a>
             
             <a 
               href="#"
-              className="text-gray-700 dark:text-gray-300 hover:text-amber-900 dark:hover:text-amber-400 transition duration-300 font-medium relative group"
+              className="text-gray-700 dark:text-gray-300 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 font-medium relative group"
             >
               Blog
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-900 to-orange-900 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
             </a>
           </nav>
 
@@ -64,7 +72,7 @@ export default function Header() {
             {/* Dark mode toggle */}
             <button 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 group"
+              className="rounded-xl p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 group"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -76,7 +84,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+              className="md:hidden rounded-xl p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -91,20 +99,20 @@ export default function Header() {
             <div className="flex flex-col gap-2 px-2 py-4">
               <Link 
                 href="#features"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-amber-900/20 rounded-lg transition duration-300 font-medium"
+                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-900/20 rounded-xl transition duration-300 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Produits
               </Link>
               <a 
                 href="#"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-amber-900/20 rounded-lg transition duration-300 font-medium"
+                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-900/20 rounded-xl transition duration-300 font-medium"
               >
                 A propos
               </a>
               <a 
                 href="#"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-amber-900/20 rounded-lg transition duration-300 font-medium"
+                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-900/20 rounded-xl transition duration-300 font-medium"
               >
                 Blog
               </a>
