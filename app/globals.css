@@ -19,7 +19,7 @@
 }
 
 #contact-modal {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+  @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50;
 }
 
 :root {
@@ -83,12 +83,69 @@
   }
 }
 
+@keyframes orb1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(50px, -80px) scale(1.2);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-30px, 40px) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translate(-60px, -30px) scale(1.1);
+    opacity: 0.35;
+  }
+}
+
+@keyframes orb2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translate(-40px, 60px) scale(1.3);
+    opacity: 0.3;
+  }
+  66% {
+    transform: translate(80px, -40px) scale(0.8);
+    opacity: 0.25;
+  }
+}
+
+@keyframes orb3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate(60px, 50px) scale(1.15);
+    opacity: 0.35;
+  }
+}
+
 .animate-blob {
   animation: blob 7s infinite;
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-orb1 {
+  animation: orb1 15s ease-in-out infinite;
+}
+
+.animate-orb2 {
+  animation: orb2 18s ease-in-out infinite;
+}
+
+.animate-orb3 {
+  animation: orb3 20s ease-in-out infinite;
 }
 
 .animate-pulse-custom {

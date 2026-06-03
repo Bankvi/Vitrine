@@ -50,21 +50,21 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
             
-            <a 
-              href="#"
+            <Link 
+              href="/documentation"
               className="text-gray-700 dark:text-gray-300 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 font-medium relative group"
             >
-              A propos
+              Documentation
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
+            </Link>
             
-            <a 
-              href="#"
+            <Link 
+              href="/blog"
               className="text-gray-700 dark:text-gray-300 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 font-medium relative group"
             >
               Blog
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-800 to-gold-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
+            </Link>
           </nav>
 
           {/* Right side - Theme toggle and menu */}

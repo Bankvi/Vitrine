@@ -1,25 +1,28 @@
-/* ===== CONFIGURATION i18n — next-intl ===== */
-/* Ce fichier définit comment charger les traductions.
-   Le backend Django gère les fichiers /messages/fr.json et /messages/en.json.
-   Le frontend consomme uniquement les clés via next-intl.
+/* ===== CONFIGURATION i18n — Configuration simple ===== */
+/* Ce fichier gère le chargement des traductions.
    
-   TODO: Ajuster le chemin des messages si nécessaire après installation de next-intl.
+   TODO: Intégrer next-intl pour une implémentation complète.
    Docs: https://next-intl.dev/docs/getting-started/app-router
 */
-
-import { getRequestConfig } from 'next-intl/server';
-import { hasLocale } from 'next-intl';
 
 // Langues supportées — la première est le fallback
 export const locales = ['fr', 'en'] as const
 export const defaultLocale = 'fr'
+export type Locale = (typeof locales)[number]
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  const requested = await requestLocale
-  const locale = hasLocale(locales, requested) ? requested : defaultLocale
+export function isValidLocale(locale: string): locale is Locale {
+  return locales.includes(locale as Locale)
+}
 
-  return {
-    locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+// Fonction utilitaire pour charger les messages
+export async function getMessages(locale: Locale) {
+  try {
+    const messages = (await import(`../messages/${locale}.json`)).default
+    return messages
+  } catch (error) {
+    console.warn(`Failed to load messages for locale: ${locale}`)
+    // Fallback à français
+    const fallback = (await import(`../messages/${defaultLocale}.json`)).default
+    return fallback
   }
-})
+}

@@ -77,13 +77,13 @@ export default function Footer() {
                         <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Ressources</h4>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="#" className="text-gray-600 dark:text-gray-400 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 relative group">
+                                <Link href="/documentation" className="text-gray-600 dark:text-gray-400 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 relative group">
                                     Documentation
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-900 to-gold-900 group-hover:w-full transition-all duration-300"></span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="text-gray-600 dark:text-gray-400 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 relative group">
+                                <Link href="/blog" className="text-gray-600 dark:text-gray-400 hover:text-gold-900 dark:hover:text-gold-400 transition duration-300 relative group">
                                     Blog
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-900 to-gold-900 group-hover:w-full transition-all duration-300"></span>
                                 </Link>
