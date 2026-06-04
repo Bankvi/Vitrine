@@ -1,36 +1,56 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Calendar, ArrowRight } from 'lucide-react'
+import Link from "next/link";
+import { Calendar, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { BlogType } from "@/type";
+import { getBlogPosts } from "@/lib/api";
 
-const articles = [
+const articles: BlogType[] = [
   {
-    id: 1,
-    title: 'Comment maximiser vos épargnes avec ESSO',
-    excerpt: 'Découvrez nos stratégies d\'épargne programmée et atteindrez vos objectifs financiers plus rapidement.',
-    category: 'Conseil',
-    date: '15 juin 2025',
-    readTime: '5 min',
+    id: "620607fa-2033-4ee3-9c08-c87fa4f9951d",
+    title: "BankVi V2 : ce qui arrive bientôt",
+    title_en: "BankVi V2: what's coming soon",
+    slug: "bankvi-v2-fonctionnalites-a-venir",
+    excerpt:
+      "Micro-crédit automatique, assurance tontine, expansion multi-pays… Découvrez la roadmap de BankVi pour 2026.",
+    cover_image: null,
+    published_at: "2026-05-21T03:08:44.269826Z",
   },
   {
-    id: 2,
-    title: 'Guide complet: Gestion des tontines digitales',
-    excerpt: 'Apprenez comment gérer efficacement vos cycles de contribution avec notre plateforme Tironienne.',
-    category: 'Guide',
-    date: '12 juin 2025',
-    readTime: '8 min',
+    id: "0d9084dc-14d6-407a-9ed4-58c0bc5e1016",
+    title: "KYC et sécurité : comment BankVi protège vos données",
+    title_en: "KYC and security: how BankVi protects your data",
+    slug: "kyc-securite-bankvi-protection-donnees",
+    excerpt:
+      "La vérification d'identité (KYC) est obligatoire pour accéder à toutes les fonctionnalités de BankVi. Voici comment nous protégeons vos documents et vos données personnelles.",
+    cover_image: null,
+    published_at: "2026-05-14T03:08:44.269826Z",
   },
   {
-    id: 3,
-    title: 'Sécurité blockchain: Protégez vos transactions',
-    excerpt: 'Comprendre la technologie blockchain et comment elle protège vos données financières.',
-    category: 'Sécurité',
-    date: '10 juin 2025',
-    readTime: '6 min',
+    id: "2fd8a76a-3245-40dd-8fbc-27b0015a56dd",
+    title: "Mobile Money au Togo : Flooz et T-Money avec BankVi",
+    title_en: "Mobile Money in Togo: Flooz and T-Money with BankVi",
+    slug: "mobile-money-togo-flooz-tmoney-bankvi",
+    excerpt:
+      "BankVi s'intègre nativement avec Moov Money (Flooz) et Togocel (T-Money) via FedaPay. Rechargez votre wallet et retirez vers votre Mobile Money en quelques secondes.",
+    cover_image: null,
+    published_at: "2026-05-04T03:08:44.269826Z",
   },
-]
+];
 
 export default function NewsSection() {
+  const [blogs, setBlogs] = useState<BlogType[]>(articles);
+
+  useEffect(()=>{
+    const get= async ()=>{
+      const rep = await getBlogPosts();
+      if (rep.success && rep.data.length>0){
+        setBlogs(rep.data.slice(0, 3));
+      }
+    }
+  },[])
+
   return (
     <section id="news" className="relative py-20 md:py-32">
       {/* Background */}
@@ -43,13 +63,14 @@ export default function NewsSection() {
             Actualités & Blog
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Restez informé des dernières actualités BankVi, conseils financiers et mises à jour produits.
+            Restez informé des dernières actualités BankVi, conseils financiers
+            et mises à jour produits.
           </p>
         </div>
 
         {/* Articles Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {articles.map((article, index) => (
+          {blogs.map((article, index) => (
             <Link
               key={article.id}
               href={`/blog/${article.id}`}
@@ -61,7 +82,7 @@ export default function NewsSection() {
                 {/* Category Badge */}
                 <div className="inline-flex items-center gap-2 w-fit mb-4">
                   <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
-                    {article.category}
+                    Actualité
                   </span>
                 </div>
 
@@ -80,9 +101,9 @@ export default function NewsSection() {
                   <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 gap-4">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {article.date}
+                      {article.published_at}
                     </span>
-                    <span>{article.readTime}</span>
+                  
                   </div>
                   <ArrowRight className="w-4 h-4 text-gold-600 dark:text-gold-400 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -103,5 +124,5 @@ export default function NewsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

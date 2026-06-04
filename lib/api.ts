@@ -3,6 +3,9 @@
  * Communicates with: https://bankvi-api.onrender.com/api/v1
  */
 
+import { getBlogPostsResponse } from "@/type"
+import axios from "axios"
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bankvi-api.onrender.com/api/v1'
 const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN
 
@@ -136,4 +139,33 @@ export async function getArticles() {
  */
 export async function getDocumentation() {
   return apiCall('/documentation')
+}
+
+
+export async function getBlogPosts(){
+
+  try{
+    const rep = await axios.get(`${API_BASE_URL}/public/blog`)
+
+    if (rep.status === 200){
+      return rep.data as getBlogPostsResponse;
+    }else{
+      throw new Error(`API Error: ${rep.status} ${rep.statusText}`)
+    }
+
+  }catch(error){
+    if (axios.isAxiosError(error)){
+      const message = "Axios Error: " + (error.response ? `${error.response.status} ${error.response.statusText}` : error.message)
+      return {
+        success: false,
+        message,
+        data: []
+      } as getBlogPostsResponse
+    }
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Unknown error',
+      data: []
+    }
+  }
 }
