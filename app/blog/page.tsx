@@ -1,72 +1,59 @@
+"use client";
+
+
+import { useState, useEffect } from 'react';
+import { BlogType } from '@/type';
+import { getBlogPosts } from '@/lib/api';
+
 import Link from 'next/link'
 import { Calendar, User, ChevronRight, Search } from 'lucide-react'
 
-const articles = [
+const articles: BlogType[] = [
   {
-    id: 1,
-    title: 'Comment maximiser vos épargnes avec ESSO',
-    excerpt: 'Découvrez nos stratégies d\'épargne programmée et atteignez vos objectifs financiers plus rapidement.',
-    author: 'Jean Dupont',
-    date: '15 juin 2025',
-    category: 'Conseil',
-    readTime: '5 min',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Guide complet: Gestion des tontines digitales',
-    excerpt: 'Apprenez comment gérer efficacement vos cycles de contribution avec notre plateforme Tironienne.',
-    author: 'Marie Traoré',
-    date: '12 juin 2025',
-    category: 'Guide',
-    readTime: '8 min',
-    featured: true,
-  },
-  {
-    id: 3,
-    title: 'Sécurité blockchain: Protégez vos transactions',
-    excerpt: 'Comprendre la technologie blockchain et comment elle protège vos données financières.',
-    author: 'Ahmed Diallo',
-    date: '10 juin 2025',
-    category: 'Sécurité',
-    readTime: '6 min',
-    featured: false,
-  },
-  {
-    id: 4,
-    title: 'Les avantages des paiements mobiles avec BankVi',
-    excerpt: 'Explorez comment les paiements mobiles révolutionnent le commerce en Afrique de l\'Ouest.',
-    author: 'Fatou Ba',
-    date: '8 juin 2025',
-    category: 'Paiements',
-    readTime: '7 min',
-    featured: false,
-  },
-  {
-    id: 5,
-    title: 'Construire une communauté financière solide',
-    excerpt: 'Les meilleures pratiques pour créer une tontine digitale prospère et durable.',
-    author: 'Pierre Noel',
-    date: '5 juin 2025',
-    category: 'Communauté',
-    readTime: '10 min',
-    featured: false,
-  },
-  {
-    id: 6,
-    title: 'Plan d\'action 2025: L\'avenir de BankVi',
-    excerpt: 'Découvrez notre vision ambitieuse pour transformer la finance en Afrique de l\'Ouest.',
-    author: 'Équipe BankVi',
-    date: '1 juin 2025',
-    category: 'Actualités',
-    readTime: '12 min',
-    featured: false,
-  },
-]
+            id: "620607fa-2033-4ee3-9c08-c87fa4f9951d",
+            title: "BankVi V2 : ce qui arrive bientôt",
+            title_en: "BankVi V2: what's coming soon",
+            slug: "bankvi-v2-fonctionnalites-a-venir",
+            excerpt: "Micro-crédit automatique, assurance tontine, expansion multi-pays… Découvrez la roadmap de BankVi pour 2026.",
+            cover_image: "https://res.cloudinary.com/your-cloud-name/image/upload/v1/media/https://res.cloudinary.com/dluh8pidu/image/upload/v1780593592/logo_azvakb.png",
+            published_at: "2026-05-21T03:08:44.269826Z"
+        },
+        {
+            id: "0d9084dc-14d6-407a-9ed4-58c0bc5e1016",
+            title: "KYC et sécurité : comment BankVi protège vos données",
+            title_en: "KYC and security: how BankVi protects your data",
+            slug: "kyc-securite-bankvi-protection-donnees",
+            excerpt: "La vérification d'identité (KYC) est obligatoire pour accéder à toutes les fonctionnalités de BankVi. Voici comment nous protégeons vos documents et vos données personnelles.",
+            cover_image: "https://res.cloudinary.com/your-cloud-name/image/upload/v1/media/https://res.cloudinary.com/dluh8pidu/image/upload/v1780593592/logo_azvakb.png",
+            published_at: "2026-05-14T03:08:44.269826Z"
+        },
+        {
+            id: "2fd8a76a-3245-40dd-8fbc-27b0015a56dd",
+            title: "Mobile Money au Togo : Flooz et T-Money avec BankVi",
+            title_en: "Mobile Money in Togo: Flooz and T-Money with BankVi",
+            slug: "mobile-money-togo-flooz-tmoney-bankvi",
+            excerpt: "BankVi s'intègre nativement avec Moov Money (Flooz) et Togocel (T-Money) via FedaPay. Rechargez votre wallet et retirez vers votre Mobile Money en quelques secondes.",
+            cover_image: "https://res.cloudinary.com/your-cloud-name/image/upload/v1/media/https://res.cloudinary.com/dluh8pidu/image/upload/v1780593592/logo_azvakb.png",
+            published_at: "2026-05-04T03:08:44.269826Z"
+        }
+];
+
 
 export default function Blog() {
-  const featuredArticles = articles.filter(a => a.featured)
-  const regularArticles = articles.filter(a => !a.featured)
+
+  const [blogs, setBlogs] = useState<BlogType[]>(articles);
+  const [featuredArticles, setFeaturedArticles] = useState<BlogType[]>(blogs.slice(0,2));
+
+    useEffect(()=>{
+      const get= async ()=>{
+        const rep = await getBlogPosts();
+        if (rep.success && rep.data.length>0){
+          setBlogs(rep.data);
+          setFeaturedArticles(rep.data.slice(0,2));
+        }
+      }
+      get();
+    },[])
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950">
@@ -105,7 +92,7 @@ export default function Blog() {
               {featuredArticles.map((article, index) => (
                 <Link
                   key={article.id}
-                  href={`/blog/${article.id}`}
+                  href={`/blog/${article.slug}`}
                   className="group relative overflow-hidden rounded-2xl glass hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
                 >
                   {/* Background gradient */}
@@ -115,9 +102,9 @@ export default function Blog() {
                   <div className="relative p-8">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
-                        {article.category}
+                        News
                       </span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">{article.readTime}</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">{article.published_at}</span>
                     </div>
 
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
@@ -150,28 +137,28 @@ export default function Blog() {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold mb-12 text-gray-900 dark:text-white">Tous les articles</h2>
           <div className="space-y-6">
-            {regularArticles.map((article) => (
+            {blogs.map((article) => (
               <Link
                 key={article.id}
-                href={`/blog/${article.id}`}
+                href={`/blog/${article.slug}`}
                 className="group flex gap-6 p-6 rounded-xl glass hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 transform hover:translate-x-1"
               >
                 {/* Thumbnail */}
-                <div className="hidden sm:block w-32 h-32 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 flex-shrink-0 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-white opacity-50">{String(article.id).padStart(2, '0')}</span>
+                <div className="hidden sm:block w-32 h-32 rounded-lg bg-gradient-to-br flex-shrink-0 flex items-center justify-center">
+                  {/*<span className="text-3xl font-bold text-white opacity-50">{String(article.id).padStart(2, '0')}</span>*/}
+                  <img src={"https://res.cloudinary.com/dluh8pidu/image/upload/v1780593592/logo_azvakb.png"} alt={article.title} className="w-full h-full object-cover rounded-lg" />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
-                      {article.category}
+                      News
                     </span>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <Calendar className="w-4 h-4" />
-                      {article.date}
+                      {article.published_at}
                     </div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">{article.readTime}</span>
                   </div>
 
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors line-clamp-2">
@@ -216,7 +203,7 @@ export default function Blog() {
               type="submit"
               className="px-8 py-3 bg-white hover:bg-gray-50 text-gold-700 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
             >
-              S'abonner
+              S&apos;abonner
             </button>
           </form>
         </div>
