@@ -3,7 +3,7 @@
  * Communicates with: https://bankvi-api.onrender.com/api/v1
  */
 
-import { getBlogPostsResponse } from "@/type"
+import { getBlogPostsResponse, getFAQsReponse, FAQItem } from "@/app/type"
 import axios from "axios"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bankvi-api.onrender.com/api/v1'
@@ -21,6 +21,39 @@ interface ContactMessage {
   email: string
   sujet: string
   message: string
+}
+
+interface FAQsResponse {
+  success: boolean
+  message: string
+  data: FAQItem[]
+}
+
+/**
+ * Get FAQs from the BankVi API
+ * No endpoint at all
+ */
+
+export async function getFAQs() : Promise<getFAQsReponse> {
+  try {
+    const rep = await axios.get(`${API_BASE_URL}/public/faq`)
+    if (rep.status === 200) {
+      return rep.data as getFAQsReponse;
+    } else {
+      throw new Error(`API Error: ${rep.status} ${rep.statusText}`)
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message = "Axios Error: " + (error.response ? `${error.response.status} ${error.response.statusText}` : error.message)
+      return {
+        success: false,
+        message,
+        data: []
+      }
+    } else {
+      throw new Error('Erreur inconnue')
+    }
+  }
 }
 
 /**

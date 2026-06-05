@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from 'react';
-import { BlogType } from '@/type';
+import { BlogType } from '@app/type';
 import { getBlogPosts } from '@/lib/api';
 
 import Link from 'next/link'
