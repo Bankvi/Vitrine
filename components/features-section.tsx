@@ -149,12 +149,12 @@ export default function FeaturesSection() {
     
   return (<>
     <section id="features" className="relative py-20 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50 to-transparent dark:via-gray-900/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-50/30 to-transparent dark:via-[#1A0F05]/50"></div>
       
       <div className="relative z-10 mx-auto max-w-6xl px-4">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeIn">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gold-800 dark:from-white dark:to-gold-400">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
             Nos Produits
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -185,11 +185,11 @@ export default function FeaturesSection() {
                     <IconComponent className="w-7 h-7" />
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                     {feature.name}
                   </h3>
                   
-                  <p className="text-gray-700 dark:text-gray-400 leading-relaxed mb-6">
+                  <p className="text-white/45 leading-relaxed mb-6">
                     {feature.description}
                   </p>
 
@@ -208,7 +208,7 @@ export default function FeaturesSection() {
 
         {/* CTA */}
         <div className="mt-16 text-center animate-fadeIn animation-delay-2000">
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-secondary mb-6">
             Besoin d&apos;en savoir plus sur nos produits?
           </p>
           <button 

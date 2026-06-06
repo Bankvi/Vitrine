@@ -9,6 +9,7 @@ export interface BlogType {
     excerpt : string,
     cover_image? : string,
     published_at : string,
+    author? : string,
 }
 
 export interface getBlogPostsResponse {

@@ -28,7 +28,7 @@ export default function RootLayout({
       suppressHydrationWarning
       style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
     >
-      <body className="min-h-full flex flex-col relative font-sans bg-white dark:bg-gray-950 transition-colors duration-300">
+      <body className="min-h-full flex flex-col relative font-sans transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="theme-preference">
           <Header />
           <main className="flex-1">

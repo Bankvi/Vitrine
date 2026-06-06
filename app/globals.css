@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
 /* Design system BankVi — thème Tailwind v4 */
-
-
-
 @theme {
   --font-sans: "Inter", sans-serif;
   --color-gold-50: #F9F3E0;
@@ -16,216 +13,133 @@
   --color-gold-700: #886C24;
   --color-gold-800: #705818;
   --color-gold-900: #58440E;
+  --color-success: #4ADE80;
+  --color-danger: #F87171;
 }
 
-#contact-modal {
-  @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50;
-}
-
+/* ========== THEME CLAIR (défaut) ========== */
 :root {
-  /* Glass morphism properties */
-  --glass-bg: rgba(255, 255, 255, 0.12);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Glass morphism — fond brun sombre chaud (identique dans les deux thèmes) */
+  --glass-bg: rgba(40, 20, 5, 0.80);
+  --glass-border: 1px solid rgba(201, 168, 76, 0.25);
   --glass-blur: 24px;
-  
-  /* Couleur primaire — Or BankVi */
+
+  /* Couleurs de surface et texte — thème clair */
+  --bg-primary: #F5F0E8;
+  --bg-card: #FFFFFF;
+  --text-primary: #1A1A1A;
+  --text-secondary: rgba(0, 0, 0, 0.40);
+
+  /* Orbes animés — dégradé radial */
+  --orb-color: rgba(60, 30, 10, 0.6);
+
+  /* Couleur primaire */
   --color-gold: #C9A84C;
-  --color-gold-light: #E0C66A;
-  --color-gold-dark: #A88A2E;
+  --color-success: #4ADE80;
+  --color-danger: #F87171;
 }
 
-/* Animations */
+/* ========== THEME SOMBRE ========== */
+.dark {
+  --glass-bg: rgba(40, 20, 5, 0.80);
+  --glass-border: 1px solid rgba(201, 168, 76, 0.25);
+  --bg-primary: #0D0D0D;
+  --bg-card: rgba(40, 20, 5, 0.80);
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.45);
+  --orb-color: rgba(60, 30, 10, 0.6);
+}
+
+/* ========== SURFACES ========== */
+
+/* Fond principal */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utilitaires de thème */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.bg-primary { background-color: var(--bg-primary); }
+.bg-card { background-color: var(--bg-card); }
+
+body.dark {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* ========== GLASS MORPHISM ========== */
+.glass {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  color: #FFFFFF;
+}
+
+.glass-secondary {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Fallback pour navigateurs sans backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: rgba(40, 20, 5, 0.90);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+}
+
+/* ========== INPUTS & FORMULAIRES ========== */
+input, textarea, select {
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  ring: 2px solid var(--color-gold);
+}
+
+/* ========== ANIMATIONS ========== */
 @keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 }
 
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(217, 119, 6, 0.6);
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(201, 168, 76, 0.6); }
 }
 
-@keyframes orb1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translate(50px, -80px) scale(1.2);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translate(-30px, 40px) scale(0.9);
-    opacity: 0.3;
-  }
-  75% {
-    transform: translate(-60px, -30px) scale(1.1);
-    opacity: 0.35;
-  }
-}
-
-@keyframes orb2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.2;
-  }
-  33% {
-    transform: translate(-40px, 60px) scale(1.3);
-    opacity: 0.3;
-  }
-  66% {
-    transform: translate(80px, -40px) scale(0.8);
-    opacity: 0.25;
-  }
-}
-
-@keyframes orb3 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.25;
-  }
-  50% {
-    transform: translate(60px, 50px) scale(1.15);
-    opacity: 0.35;
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-orb1 {
-  animation: orb1 15s ease-in-out infinite;
-}
-
-.animate-orb2 {
-  animation: orb2 18s ease-in-out infinite;
-}
-
-.animate-orb3 {
-  animation: orb3 20s ease-in-out infinite;
-}
-
-.animate-pulse-custom {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
+.animate-blob { animation: blob 7s infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-custom { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 .animate-shimmer {
   animation: shimmer 3s infinite;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   background-size: 1000px 100%;
 }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+.animation-delay-1000 { animation-delay: 1s; }
 
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-/* Glass morphism */
-.glass {
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-  .glass {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-}
-
-/* Input and form styling */
-input, textarea, select {
-  @apply transition-all duration-300;
-}
-
-input:focus, textarea:focus, select:focus {
-  @apply ring-2 ring-amber-500;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: #FFFFFF;
-  color: #1A1A1A;
-  @apply transition-colors duration-300;
-}
-
-/* Dark mode body */
-body.dark {
-  background-color: #0D0D0D;
-  color: #F5F5F5;
-}
-
-@layer base {
-  .dark {
-    background-color: #0D0D0D;
-    color: #F5F5F5;
-  }
-}
-
-/* Smooth transitions */
-a {
-  @apply transition-colors duration-300;
-}
-
-button {
-  @apply transition-all duration-300;
-}
+/* ========== SMOOTH SCROLL & TRANSITIONS ========== */
+html { scroll-behavior: smooth; }
+a, button { transition: all 0.3s ease; }

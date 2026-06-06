@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link'
 import { getFAQs } from '@/lib/api';
@@ -48,13 +50,14 @@ export default function FAQ() {
     },[])
 
 
-    return(
-        {/* Page content goes here, using FAQs and featuredFAQ state variables */}
-        {featuredFAQ.map((faq) => (
-            <section key={faq.id}>
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-            </section>
-        ))}
+    return (
+        <>
+            {featuredFAQ.map((faq) => (
+                <section key={faq.id}>
+                    <h3>{faq.question}</h3>
+                    <p>{faq.answer}</p>
+                </section>
+            ))}
+        </>
     )
 }

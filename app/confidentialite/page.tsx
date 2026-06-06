@@ -7,14 +7,14 @@ export const metadata: Metadata = {
 
 export default function ConfidentialitePage() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#1A0F05] via-[#0D0D0D] to-[#1A0F05]">
       {/* Orbe décoratif */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gold-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(60,30,10,0.6) 0%, transparent 70%)' }}></div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 py-20">
         <h1 className="text-4xl font-bold text-white mb-8">Politique de confidentialité</h1>
 
-        <div className="glass rounded-2xl p-8 space-y-6 text-gray-300 leading-relaxed">
+        <div className="glass rounded-2xl p-8 space-y-6 leading-relaxed">
           <section>
             <h2 className="text-xl font-semibold text-white mb-3">1. Collecte des données</h2>
             <p>
@@ -82,7 +82,7 @@ export default function ConfidentialitePage() {
             </p>
           </section>
 
-          <p className="text-sm text-gray-500 pt-4 border-t border-white/10">
+          <p className="text-sm text-white/45 pt-4 border-t border-white/10">
             Dernière mise à jour : 2026
           </p>
         </div>

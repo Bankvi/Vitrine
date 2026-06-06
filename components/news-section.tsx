@@ -34,15 +34,15 @@ export default function NewsSection() {
   return (
     <section id="news" className="relative py-20 md:py-32">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50 to-transparent dark:via-gray-900/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-50/30 to-transparent dark:via-[#1A0F05]/50"></div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeIn">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gold-800 dark:from-white dark:to-gold-400">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
             Actualités & Blog
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             Restez informé des dernières actualités BankVi, conseils financiers et mises à jour produits.
           </p>
         </div>
@@ -57,7 +57,7 @@ export default function NewsSection() {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Card */}
-              <div className="relative h-full overflow-hidden rounded-2xl glass backdrop-blur-md p-8 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 flex flex-col">
+              <div className="relative h-full overflow-hidden rounded-2xl glass backdrop-blur-md p-8 hover:brightness-110 transition-all duration-300 flex flex-col">
                 {/* Category Badge */}
                 <div className="inline-flex items-center gap-2 w-fit mb-4">
                   <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
@@ -66,18 +66,18 @@ export default function NewsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors line-clamp-2">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors line-clamp-2">
                   {article.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow line-clamp-2">
+                <p className="text-white/45 mb-6 flex-grow line-clamp-2">
                   {article.excerpt}
                 </p>
 
                 {/* Footer */}
                 <div className="flex items-center justify-between pt-6 border-t border-white/10 dark:border-white/5">
-                  <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 gap-4">
+                  <div className="flex items-center text-xs text-white/45 gap-4">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {article.date}

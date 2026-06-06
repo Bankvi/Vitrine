@@ -54,28 +54,28 @@ export default function Documentation() {
   ]
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950">
+    <main className="min-h-screen bg-primary">
       {/* Header */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+      <section className="relative py-20 md:py-32 bg-gradient-to-b from-white to-gold-50/30 dark:from-[#0D0D0D] dark:to-[#1A0F05]">
         <div className="mx-auto max-w-6xl px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gold-800 dark:from-white dark:to-gold-400">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
             Documentation
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+          <p className="text-xl text-secondary max-w-2xl">
             Tout ce dont vous avez besoin pour maîtriser BankVi
           </p>
         </div>
       </section>
 
       {/* Search Bar */}
-      <section className="sticky top-16 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-4">
+      <section className="sticky top-16 z-40 bg-primary border-b border-white/10 py-4">
         <div className="mx-auto max-w-6xl px-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input 
               type="search"
               placeholder="Rechercher dans la documentation..."
-              className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
+              className="w-full pl-12 pr-4 py-3 rounded-lg border border-white/10 bg-white/10 dark:bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
             />
           </div>
         </div>
@@ -91,26 +91,26 @@ export default function Documentation() {
                 <Link 
                   key={section.id}
                   href={`/documentation/${section.id}`}
-                  className="group glass rounded-2xl p-8 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+                  className="group glass rounded-2xl p-8 hover:brightness-110 transition-all duration-300 transform hover:scale-105"
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center text-white">
                       <Icon className="w-7 h-7" />
                     </div>
-                    <ChevronRight className="w-6 h-6 text-gold-600 dark:text-gold-400 group-hover:translate-x-2 transition-transform" />
+                    <ChevronRight className="w-6 h-6 text-gold-400 group-hover:translate-x-2 transition-transform" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-gold-400 transition-colors">
                     {section.title}
                   </h3>
 
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  <p className="text-white/45 mb-6">
                     {section.description}
                   </p>
 
                   <ul className="space-y-2">
                     {section.articles.map((article) => (
-                      <li key={article} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                      <li key={article} className="flex items-center gap-2 text-white/45">
                         <div className="w-2 h-2 rounded-full bg-gold-500"></div>
                         {article}
                       </li>

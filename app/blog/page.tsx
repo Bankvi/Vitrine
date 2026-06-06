@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from 'react';
-import { BlogType } from '@app/type';
+import { BlogType } from '@/app/type';
 import { getBlogPosts } from '@/lib/api';
 
 import Link from 'next/link'
@@ -56,28 +56,28 @@ export default function Blog() {
     },[])
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950">
+    <main className="min-h-screen bg-primary">
       {/* Header */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+      <section className="relative py-20 md:py-32 bg-gradient-to-b from-white to-gold-50/30 dark:from-[#0D0D0D] dark:to-[#1A0F05]">
         <div className="mx-auto max-w-6xl px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gold-800 dark:from-white dark:to-gold-400">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
             Blog BankVi
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+          <p className="text-xl text-secondary max-w-2xl">
             Actualités, conseils et guides pour maîtriser la finance digitale
           </p>
         </div>
       </section>
 
       {/* Search Bar */}
-      <section className="sticky top-16 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-4">
+      <section className="sticky top-16 z-40 bg-primary border-b border-white/10 py-4">
         <div className="mx-auto max-w-6xl px-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input 
               type="search"
               placeholder="Rechercher un article..."
-              className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
+              className="w-full pl-12 pr-4 py-3 rounded-lg border border-white/10 bg-white/10 dark:bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
             />
           </div>
         </div>
@@ -87,13 +87,13 @@ export default function Blog() {
       {featuredArticles.length > 0 && (
         <section className="py-20 md:py-32">
           <div className="mx-auto max-w-6xl px-4">
-            <h2 className="text-3xl font-bold mb-12 text-gray-900 dark:text-white">Articles en vedette</h2>
+            <h2 className="text-3xl font-bold mb-12 text-primary">Articles en vedette</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {featuredArticles.map((article, index) => (
                 <Link
                   key={article.id}
                   href={`/blog/${article.slug}`}
-                  className="group relative overflow-hidden rounded-2xl glass hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+                  className="group relative overflow-hidden rounded-2xl glass hover:brightness-110 transition-all duration-300 transform hover:scale-105"
                 >
                   {/* Background gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gold-100 to-orange-100 dark:from-gold-900/20 dark:to-orange-900/20 opacity-50"></div>
@@ -101,26 +101,26 @@ export default function Blog() {
                   {/* Content */}
                   <div className="relative p-8">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-gold-400 bg-gold-900/30 px-3 py-1 rounded-full">
                         News
                       </span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">{article.published_at}</span>
+                      <span className="text-xs text-white/45">{article.published_at}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors">
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-gray-700 dark:text-gray-400 mb-6">
+                    <p className="text-white/45 mb-6">
                       {article.excerpt}
                     </p>
 
-                    <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700">
-                      <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                      <div className="flex items-center gap-3 text-sm text-white/45">
                         <User className="w-4 h-4" />
                         <span>{article.author}</span>
                       </div>
-                      <div className="flex items-center text-gold-600 dark:text-gold-400 font-semibold gap-1 group-hover:gap-2 transition-all">
+                      <div className="flex items-center text-gold-400 font-semibold gap-1 group-hover:gap-2 transition-all">
                         Lire <ChevronRight className="w-4 h-4" />
                       </div>
                     </div>
@@ -133,48 +133,47 @@ export default function Blog() {
       )}
 
       {/* All Articles */}
-      <section className="py-20 md:py-32 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 md:py-32 bg-white/50 dark:bg-gray-900/50">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl font-bold mb-12 text-gray-900 dark:text-white">Tous les articles</h2>
+          <h2 className="text-3xl font-bold mb-12 text-primary">Tous les articles</h2>
           <div className="space-y-6">
             {blogs.map((article) => (
               <Link
                 key={article.id}
                 href={`/blog/${article.slug}`}
-                className="group flex gap-6 p-6 rounded-xl glass hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 transform hover:translate-x-1"
+                className="group flex gap-6 p-6 rounded-xl glass hover:brightness-110 transition-all duration-300 transform hover:translate-x-1"
               >
                 {/* Thumbnail */}
                 <div className="hidden sm:block w-32 h-32 rounded-lg bg-gradient-to-br flex-shrink-0 flex items-center justify-center">
-                  {/*<span className="text-3xl font-bold text-white opacity-50">{String(article.id).padStart(2, '0')}</span>*/}
                   <img src={"https://res.cloudinary.com/dluh8pidu/image/upload/v1780593592/logo_azvakb.png"} alt={article.title} className="w-full h-full object-cover rounded-lg" />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-100 dark:bg-gold-900/30 px-3 py-1 rounded-full">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-gold-400 bg-gold-900/30 px-3 py-1 rounded-full">
                       News
                     </span>
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center gap-2 text-sm text-white/45">
                       <Calendar className="w-4 h-4" />
                       {article.published_at}
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-gold-700 dark:group-hover:text-gold-400 transition-colors line-clamp-2">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold-400 transition-colors line-clamp-2">
                     {article.title}
                   </h3>
 
-                  <p className="text-gray-700 dark:text-gray-400 mb-4 line-clamp-2">
+                  <p className="text-white/45 mb-4 line-clamp-2">
                     {article.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center gap-2 text-sm text-white/45">
                       <User className="w-4 h-4" />
                       Par {article.author}
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gold-600 dark:text-gold-400 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-5 h-5 text-gold-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
