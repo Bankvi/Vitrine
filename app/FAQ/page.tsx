@@ -53,9 +53,20 @@ export default function FAQ() {
     return (
         <>
             {featuredFAQ.map((faq) => (
-                <section key={faq.id}>
-                    <h3>{faq.question}</h3>
-                    <p>{faq.answer}</p>
+                <section key={faq.id} className="mb-8 p-4 mx-auto max-w-6xl px-4 top-0 bg-gradient-to-br from-gold-500/10 to-gold-600/10 rounded-lg border border-gold-500/20">
+                    <div className="mb-4 left-4 top-1/2 -translate-y-1/2">
+                        <h3>{faq.question}</h3>
+                    </div>
+
+                    <div className="p-4 bg-gradient-to-br from-gold-500/20 to-gold-600/20 rounded-lg">
+                        <p>{faq.answer}</p>
+                    </div>
+
+                    <div>
+                        <button className="mt-4 bg-gold-500 hover:bg-gold-600 text-white font-bold py-2 px-4 rounded">
+                            En savoir plus
+                        </button>
+                    </div>
                 </section>
             ))}
         </>

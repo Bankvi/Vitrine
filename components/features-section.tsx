@@ -1,6 +1,5 @@
 'use client'
 
-
 import { useEffect, useState } from 'react'
 import { sendContactMessage } from '@/lib/api'
 import { Zap, Wallet, Users, Link2, X } from 'lucide-react'
@@ -38,190 +37,189 @@ const features = [
 ]
 
 export default function FeaturesSection() {
-
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [formData, setFormData] = useState({
-      nom: '',
-      sujet: '',
-      email: '',
-      message: ''
-    })
+    nom: '',
+    sujet: '',
+    email: '',
+    message: ''
+  })
   
-    useEffect(() => {
-      // Check initial hash on mount
-      const set = ()=>{if (window.location.hash.includes('#contact')) {
+  useEffect(() => {
+    const set = () => {
+      if (window.location.hash.includes('#contact')) {
         setIsModalOpen(true)
-      }}
-
-      set();
-    }, [])
-  
-    useEffect(() => {
-      const handleEscapeKey = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setIsModalOpen(false)
-        }
       }
+    }
+    set();
+  }, [])
   
-      const handleClickOutside = (event: MouseEvent) => {
-        const modal = document.getElementById('contact-modal')
-        if (modal && event.target === modal) {
-          setIsModalOpen(false)
-        }
+  useEffect(() => {
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false)
       }
+    }
   
-      // Handle hash-based modal opening
-      const handleHashChange = () => {
-        if (window.location.hash.includes('#contact')) {
-          setIsModalOpen(true)
-        } else if (window.location.hash === '' || window.location.hash === '#') {
-          setIsModalOpen(false)
-        }
+    const handleClickOutside = (event: MouseEvent) => {
+      const modal = document.getElementById('contact-modal')
+      if (modal && event.target === modal) {
+        setIsModalOpen(false)
       }
+    }
   
-      if (isModalOpen) {
-        document.body.style.overflow = 'hidden'
-        document.addEventListener('keydown', handleEscapeKey)
-        document.addEventListener('click', handleClickOutside)
+    const handleHashChange = () => {
+      if (window.location.hash.includes('#contact')) {
+        setIsModalOpen(true)
+      } else if (window.location.hash === '' || window.location.hash === '#') {
+        setIsModalOpen(false)
+      }
+    }
+  
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleEscapeKey)
+      document.addEventListener('click', handleClickOutside)
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  
+    window.addEventListener('hashchange', handleHashChange)
+  
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey)
+      document.removeEventListener('click', handleClickOutside)
+      window.removeEventListener('hashchange', handleHashChange)
+      document.body.style.overflow = 'auto'
+    }
+  }, [isModalOpen])
+  
+  const openContactModal = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault()
+    setIsModalOpen(true);
+  }
+  
+  const closeContactModal = () => {
+    setIsModalOpen(false)
+  }
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+  
+    try {
+      const result = await sendContactMessage({
+        nom: formData.nom,
+        email: formData.email,
+        sujet: formData.sujet,
+        message: formData.message,
+      })
+  
+      if (result && result.success) {
+        setSubmitStatus('success')
+        setFormData({ nom: '', sujet: '', email: '', message: '' })
+  
+        setTimeout(() => {
+          setIsModalOpen(false)
+          setSubmitStatus('idle')
+        }, 1500)
       } else {
-        document.body.style.overflow = 'auto'
-      }
-  
-      window.addEventListener('hashchange', handleHashChange)
-  
-      return () => {
-        document.removeEventListener('keydown', handleEscapeKey)
-        document.removeEventListener('click', handleClickOutside)
-        window.removeEventListener('hashchange', handleHashChange)
-        document.body.style.overflow = 'auto'
-      }
-    }, [isModalOpen])
-  
-    const openContactModal = (e?: React.MouseEvent) => {
-      if (e) e.preventDefault()
-      setIsModalOpen(true);
-    }
-  
-    const closeContactModal = () => {
-      setIsModalOpen(false)
-    }
-  
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = e.target
-      setFormData(prev => ({ ...prev, [name]: value }))
-    }
-  
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault()
-      setIsSubmitting(true)
-      setSubmitStatus('idle')
-  
-      try {
-        const result = await sendContactMessage({
-          nom: formData.nom,
-          email: formData.email,
-          sujet: formData.sujet,
-          message: formData.message,
-        })
-  
-        if (result.success) {
-          setSubmitStatus('success')
-          setFormData({ nom: '', sujet: '', email: '', message: '' })
-  
-          setTimeout(() => {
-            setIsModalOpen(false)
-            setSubmitStatus('idle')
-          }, 1500)
-        } else {
-          throw new Error(result.error)
-        }
-  
-      } catch (error) {
-        console.error('Erreur lors de l\'envoi du message:', error)
+        console.warn("Le serveur a renvoyé un échec :", result?.error)
         setSubmitStatus('error')
-      } finally {
-        setIsSubmitting(false)
       }
+  
+    } catch (error) {
+      console.error('Erreur critique lors de l\'envoi du message:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
     }
+  }
     
-  return (<>
-    <section id="features" className="relative py-20 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-50/30 to-transparent dark:via-[#1A0F05]/50"></div>
-      
-      <div className="relative z-10 mx-auto max-w-6xl px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeIn">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
-            Nos Produits
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Une suite complète de solutions financières digitales adaptées à vos besoins.
-          </p>
-        </div>
+  return (
+    <>
+      <section id="features" className="relative py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-50/30 to-transparent dark:via-[#1A0F05]/50"></div>
+        
+        <div className="relative z-10 mx-auto max-w-6xl px-4">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-fadeIn">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-gold-600 dark:from-white dark:to-gold-400">
+              Nos Produits
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Une suite complète de solutions financières digitales adaptées à vos besoins.
+            </p>
+          </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-6">
-          {features.map((feature, index) => {
-            const IconComponent = feature.icon
-            return (
-              <Link 
-                key={feature.id}
-                href={`#${feature.id}`}
-                className={`group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 transform hover:scale-105 cursor-pointer animate-slideInUp`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                
-                {/* Glass morphism layer */}
-                <div className="absolute inset-0 glass opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-7 h-7" />
-                  </div>
+          {/* Features Grid */}
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-6">
+            {features.map((feature, index) => {
+              const IconComponent = feature.icon
+              return (
+                <Link 
+                  key={feature.id}
+                  href={`#${feature.id}`}
+                  className={`group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 transform hover:scale-105 cursor-pointer animate-slideInUp`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Background Gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
-                    {feature.name}
-                  </h3>
-                  
-                  <p className="text-white/45 leading-relaxed mb-6">
-                    {feature.description}
-                  </p>
+                  {/* Glass morphism layer */}
+                  <div className="absolute inset-0 glass opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
 
-                  <div className="flex items-center text-gold-600 dark:text-gold-400 font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
-                    Découvrir
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <IconComponent className="w-7 h-7" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
+                      {feature.name}
+                    </h3>
+                    
+                    <p className="text-white/45 leading-relaxed mb-6">
+                      {feature.description}
+                    </p>
+
+                    <div className="flex items-center text-gold-600 dark:text-gold-400 font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
+                      Découvrir
+                      <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Border glow on hover */}
-                <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-gold-400/50 transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-              </Link>
-            )
-          })}
+                  {/* Border glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-gold-400/50 transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* CTA */}
+          <div className="mt-16 text-center animate-fadeIn animation-delay-2000">
+            <p className="text-secondary mb-6">
+              Besoin d&apos;en savoir plus sur nos produits?
+            </p>
+            <button 
+              onClick={() => openContactModal()}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Nous Contacter
+            </button>
+          </div>
         </div>
+      </section>
 
-        {/* CTA */}
-        <div className="mt-16 text-center animate-fadeIn animation-delay-2000">
-          <p className="text-secondary mb-6">
-            Besoin d&apos;en savoir plus sur nos produits?
-          </p>
-          <button 
-            onClick={()=>openContactModal()}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            Nous Contacter
-          </button>
-        </div>
-      </div>
-    </section>
-
-    {/* Contact Modal */}
+      {/* Contact Modal */}
       {isModalOpen && (
         <section 
           id="contact-modal" 

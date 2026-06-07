@@ -68,14 +68,14 @@ export default function Documentation() {
       </section>
 
       {/* Search Bar */}
-      <section className="sticky top-16 z-40 bg-primary border-b border-white/10 py-4">
+      <section className="sticky top-16 z-40 bg-primary border-b border-gold-500/10 py-4">
         <div className="mx-auto max-w-6xl px-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input 
               type="search"
               placeholder="Rechercher dans la documentation..."
-              className="w-full pl-12 pr-4 py-3 rounded-lg border border-white/10 bg-white/10 dark:bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
+              className="w-full pl-12 pr-4 py-3 rounded-lg border border-gold-500/10 bg-gold-500/10 dark:bg-gold-500/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
             />
           </div>
         </div>

@@ -59,56 +59,26 @@ export async function getFAQs() : Promise<getFAQsReponse> {
 /**
  * Send a contact message to the BankVi API
  * Endpoint: POST /messages or /contact/messages
+ * using axios instead of fetch for better error handling and timeout support
  */
-export async function sendContactMessage(
-  data: ContactMessage
-): Promise<ApiResponse<any>> {
+export async function sendContactMessage(data: ContactMessage) {
   try {
-    // Try different endpoint patterns - adjust based on your API structure
-    const endpoints = [
-      '/messages',
-      '/contact/messages',
-      '/contact',
-    ]
-
-    for (const endpoint of endpoints) {
-      try {
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(API_TOKEN && { 'Authorization': `Bearer ${API_TOKEN}` }),
-          },
-          body: JSON.stringify(data),
-        })
-
-        if (response.ok) {
-          const result = await response.json()
-          return { success: true, data: result }
-        }
-
-        // If not found, try next endpoint
-        if (response.status !== 404) {
-          throw new Error(`API Error: ${response.status} ${response.statusText}`)
-        }
-      } catch (error) {
-        // Continue to next endpoint
-        continue
-      }
+    const response = await axios.post(`${API_BASE_URL}/public/contact`, data );
+    return {
+      success: true,
+      message: 'Erreur lors de l\'envoi du message'
     }
-
+  }catch (error: any) {
+    console.error('Error sending contact message:', error)
+    const erorrMessage = error.response?.data?.message || error.message || 'Erreur inconnue'
     return {
       success: false,
-      error: 'Impossible de trouver l\'endpoint de contact. Vérifiez la configuration API.',
-    }
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue'
-    return {
-      success: false,
-      error: errorMessage,
+      error: erorrMessage
     }
   }
 }
+
+
 
 /**
  * Generic API call function
