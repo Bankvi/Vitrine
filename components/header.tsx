@@ -42,13 +42,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link 
-              href="#features"
-              className="text-white/80 hover:text-gold-400 transition duration-300 font-medium relative group"
-            >
-              Produits
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-400 to-gold-500 group-hover:w-full transition-all duration-300"></span>
-            </Link>
 
             {/*link to FAQs*/}
             <Link 

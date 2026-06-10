@@ -39,3 +39,15 @@ export interface getFAQsReponse {
     message : string,
     data : FAQItem[];
 }
+
+export interface ContactMessage {
+  nom: string
+  email: string
+  sujet: string
+  message: string
+}
+
+export interface ContactMessageResponse {
+    success: boolean,
+    message: string,
+}
